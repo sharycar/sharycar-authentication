@@ -20,8 +20,8 @@ public class AuthenticationResource {
 
     //@TODO: Potrebno je vključiti context manager - trenutno še težave z bazo oz. persistence konfiguracijo??
     //
-    //  @PersistenceContext
-  //  private EntityManager em;
+      @PersistenceContext
+    private EntityManager em;
 
     /**
      *  Proof of concept - @by Jaka
@@ -29,11 +29,11 @@ public class AuthenticationResource {
     @GET
     public Response getUsers() {
 
-      //  TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
+        TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
 
-       // List<User> users = query.getResultList();
+        List<User> users = query.getResultList();
 
-        return Response.ok("OK").build();
+        return Response.ok(users).build();
     }
 
     /**
