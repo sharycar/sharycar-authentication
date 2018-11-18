@@ -14,7 +14,7 @@ cache:
   - $HOME/.m2
 
 env:
-- DOCKER_IMAGE=krajncjaka/sharycar-microservice-authentication
+- DOCKER_IMAGE=jkrajnc11/sharycar-microservice-authentication
 
 script:
 - mvn clean install -U
