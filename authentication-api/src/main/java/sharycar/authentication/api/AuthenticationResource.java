@@ -33,7 +33,7 @@ public class AuthenticationResource {
 
         List<User> users = query.getResultList();
 
-        return Response.ok(users).build();
+        return Response.ok("Kje ste Pi ke! Poganja me kubernetes").build();
     }
 
     /**
