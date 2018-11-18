@@ -1,7 +1,7 @@
 package sharycar.authentication.api;
 
 import javax.persistence.*;
-// sd testss
+// sd testss s
 @Entity
 @Table(name = "users")
 @NamedQuery(name = "User.findAll", query = "SELECT * FROM User u")
