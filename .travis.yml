@@ -12,7 +12,10 @@ jdk:
 cache:
   directories:
   - $HOME/.m2
-
+  
+branches:
+  only:
+  - master
 env:
 - DOCKER_IMAGE=jkrajnc11/sharycar-microservice-authentication
 
