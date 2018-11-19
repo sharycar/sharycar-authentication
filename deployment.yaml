@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: sharycar-auth-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sharycar-auth
+  template:
+    metadata:
+      labels:
+        app: sharycar-auth
+    spec:
+      containers:
+      - name: sharycar-authenticetion-container
+        image: jkrajnc11/sharycar-microservice-authentication
+        ports:
+        - containerPort: 8080
