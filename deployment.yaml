@@ -15,6 +15,5 @@ spec:
       containers:
       - name: sharycar-authenticetion-container
         image: jkrajnc11/sharycar-microservice-authentication
-        imagePullPolicy: "Always"
         ports:
         - containerPort: 8080

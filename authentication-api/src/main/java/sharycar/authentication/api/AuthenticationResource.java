@@ -54,8 +54,8 @@ public class AuthenticationResource {
      *  Proof of concept - @by Jaka
      */
     @GET
-    @Path("/{id}/{password}")
-    public Response getUser(@PathParam("id") Integer id, @PathParam("password") Integer password) {
+    @Path("/{id}")
+    public Response getUserJWT(@PathParam("id") Integer id) {
 
         // TODO Check password
         User u = em.find(User.class, id);
