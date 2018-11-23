@@ -18,9 +18,7 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class AuthenticationResource {
 
-    //@TODO: Potrebno je vključiti context manager - trenutno še težave z bazo oz. persistence konfiguracijo??
-    //
-      @PersistenceContext
+    @PersistenceContext
     private EntityManager em;
 
     /**
@@ -43,7 +41,11 @@ public class AuthenticationResource {
     @Path("/{id}")
     public Response getUser(@PathParam("id") Integer id) {
 
-        return Response.ok("Requested user"+String.valueOf(id)).build();
-
+            User u = em.find(User.class, id);
+            if (u == null)
+                return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.ok(u).build();
     }
+
+
 }
