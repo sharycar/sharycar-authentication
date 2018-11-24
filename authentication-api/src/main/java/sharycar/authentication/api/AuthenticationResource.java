@@ -11,9 +11,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.exceptions.JWTCreationException;
+//import com.auth0.jwt.algorithms.Algorithm;
+//import com.auth0.jwt.JWT;
+//import com.auth0.jwt.exceptions.JWTCreationException;
 
 @Path("/users")
 @RequestScoped
@@ -50,29 +50,39 @@ public class AuthenticationResource {
             return Response.ok(u).build();
     }
 
+
     /**
      *  Proof of concept - @by Jaka
      */
     @GET
-    @Path("/{id}")
-    public Response getUserJWT(@PathParam("id") Integer id) {
-
-        // TODO Check password
-        User u = em.find(User.class, id);
-
-        String token;
-        try {
-            Algorithm algorithm = Algorithm.HMAC256("replaceWithSomeSecret");
-            token = JWT.create()
-                    .withIssuer("auth0")
-                    .sign(algorithm);
-        } catch (JWTCreationException exception){
-            //Invalid Signing configuration / Couldn't convert Claims.
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-        }
-
-        return Response.ok(token).build();
+    @Path("/info")
+    public Response getProjectInfo() {
+        ProjectInfoClass pic = new ProjectInfoClass();
+        return Response.ok(pic).build();
     }
+//    /**
+//     *  Proof of concept - @by Jaka
+//     */
+//    @GET
+//    @Path("/{id}")
+//    public Response getUserJWT(@PathParam("id") Integer id) {
+//
+//        // TODO Check password
+//        User u = em.find(User.class, id);
+//
+//        String token;
+//        try {
+//            Algorithm algorithm = Algorithm.HMAC256("replaceWithSomeSecret");
+//            token = JWT.create()
+//                    .withIssuer("auth0")
+//                    .sign(algorithm);
+//        } catch (JWTCreationException exception){
+//            //Invalid Signing configuration / Couldn't convert Claims.
+//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+//        }
+//
+//        return Response.ok(token).build();
+//    }
 
 
 }
