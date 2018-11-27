@@ -21,8 +21,8 @@ public class ProjectInfoClass {
         this.clani[1] = "js0730";
 
         // EndPoints
-        this.mikrostoritve[0] = "35.188.156.176:8080/users";
-        this.mikrostoritve[1] = "104.198.218.72:8080/comments";
+        this.mikrostoritve[0] = "http://35.188.156.176:8080/users";
+        this.mikrostoritve[1] = "http://104.198.218.72:8080/comments";
         // Github links
         this.github[0] = "https://github.com/sharycar/sharycar-authentication";
         this.github[1] = "https://github.com/sharycar/sharycar-feedback";
