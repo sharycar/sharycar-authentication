@@ -31,7 +31,7 @@ public class ProjectInfoClass {
         this.travis[1] = "https://travis-ci.org/sharycar/sharycar-feedback";
         // Dockerhub links
         this.dockerhub[0] = "https://hub.docker.com/r/jkrajnc11/sharycar-microservice-authentication";
-        this.dockerhub[0] = "https://hub.docker.com/r/jkrajnc11/sharycar-microservice-feedback";
+        this.dockerhub[1] = "https://hub.docker.com/r/jkrajnc11/sharycar-microservice-feedback";
 
     }
 }
