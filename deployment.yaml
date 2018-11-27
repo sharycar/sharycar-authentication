@@ -17,3 +17,17 @@ spec:
         image: jkrajnc11/sharycar-microservice-authentication
         ports:
         - containerPort: 8080
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sharycar-auth-lb
+spec:
+  type: LoadBalancer
+  selector:
+    app: sharycar-auth
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
