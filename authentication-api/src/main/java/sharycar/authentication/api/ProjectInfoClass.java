@@ -16,15 +16,22 @@ public class ProjectInfoClass {
         this.travis = new String[2];
         this.dockerhub = new String[2];
 
-        this.opis_projekta = "SharyCar - Mobile app for car sharing/renting build on Kumuluzee";
+        this.opis_projekta = "SharyCar - Mobile App for car sharing/renting - built on Kumuluzee";
         this.clani[0] = "jk8279";
-        // @ TODO add Janez jšXXXX; ??
+        this.clani[1] = "js0730";
 
-        // First microservice -authentication
-        this.mikrostoritve[0] = "http://35.189.96.118:8081/v1/orders"; //@TODO replace, add second one
+        // EndPoints
+        this.mikrostoritve[0] = "35.188.156.176:8080/users";
+        this.mikrostoritve[1] = "104.198.218.72:8080/comments";
+        // Github links
         this.github[0] = "https://github.com/sharycar/sharycar-authentication";
+        this.github[1] = "https://github.com/sharycar/sharycar-feedback";
+        // Travis links
         this.travis[0] = "https://travis-ci.org/sharycar/sharycar-authentication";
+        this.travis[1] = "https://travis-ci.org/sharycar/sharycar-feedback";
+        // Dockerhub links
         this.dockerhub[0] = "https://hub.docker.com/r/jkrajnc11/sharycar-microservice-authentication";
+        this.dockerhub[0] = "https://hub.docker.com/r/jkrajnc11/sharycar-microservice-feedback";
 
     }
 }
