@@ -8,20 +8,22 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    private String username;
-
     private String email;
 
-    public Integer getId() {
-        return id;
+    @Column(unique=true)
+    private String username;
+
+
+    public String getPassword() {
+        return password;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
+    private String password;
+
 
     public String getUsername() {
         return username;
