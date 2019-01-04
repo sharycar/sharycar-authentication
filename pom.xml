@@ -8,6 +8,7 @@
     <version>1.0.0</version>
     <modules>
         <module>authentication-api</module>
+        <module>authentication-bussines-logic</module>
     </modules>
     <packaging>pom</packaging>
 

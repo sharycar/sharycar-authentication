@@ -1,4 +1,4 @@
-<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+    <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
 
 
     <persistence-unit name="users" transaction-type="RESOURCE_LOCAL">
@@ -12,4 +12,4 @@
             <property name="javax.persistence.schema-generation.drop-source" value="metadata"/>
         </properties>
     </persistence-unit>
-</persistence>
+    </persistence>

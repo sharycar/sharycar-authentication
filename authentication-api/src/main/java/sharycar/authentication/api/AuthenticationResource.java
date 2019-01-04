@@ -1,7 +1,7 @@
 package sharycar.authentication.api;
 
 import sharycar.authentication.api.User;
-
+import sharycar.authentication.bussineslogic.AuthHelper;
 import java.security.MessageDigest;
 
 import javax.enterprise.context.RequestScoped;
@@ -27,7 +27,9 @@ public class AuthenticationResource {
     private EntityManager em;
 
     /**
-     *  Proof of concept - @by Jaka
+     * Get users
+     *
+     * @return
      */
     @GET
     public Response getUsers() {
@@ -40,10 +42,12 @@ public class AuthenticationResource {
     }
 
     /**
-     *  Proof of concept - @by Jaka
+     * Get user profile data
+     * @param id
+     * @return
      */
     @GET
-    @Path("/{id}")
+        @Path("/{id}")
     public Response getUser(@PathParam("id") Integer id) {
 
             User u = em.find(User.class, id);
@@ -52,33 +56,17 @@ public class AuthenticationResource {
             return Response.ok(u).build();
     }
 
-    public static String cryptString(String pass){
-        try {
-
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] passBytes = pass.getBytes();
-            md.reset();
-            byte[] digested = md.digest(passBytes);
-            StringBuffer sb = new StringBuffer();
-            for(int i=0;i<digested.length;i++){
-                sb.append(Integer.toHexString(0xff & digested[i]));
-            }
-            return sb.toString();
-        } catch (Exception ex) {
-            return null;
-        }
-
-    }
 
     @POST
     public Response registerUser(User user) {
+        user.setId(null);
         if (user.getUsername() == null || user.getUsername().isEmpty()
                 || user.getEmail() == null || user.getEmail().isEmpty()
         || user.getPassword() == null || user.getPassword().isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         } else {
             // Encrypt it
-            user.setPassword(cryptString(user.getPassword()));
+            user.setPassword(AuthHelper.cryptString(user.getPassword()));
             if (user.getPassword() == null) {
                 return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(user).build();
             }
@@ -92,16 +80,26 @@ public class AuthenticationResource {
             }
         }
 
+        // User was not inserted
+        if (user.getId() == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Invalid parameters").build();
+        }
+
         return Response.status(Response.Status.CREATED).entity(user).build();
 
     }
 
+    /**
+     * Login user and return token
+     * @param user
+     * @return
+     */
     @POST
     @Path("/login")
     public Response login(User user) {
         try {
             Query query = em.createQuery("SELECT u FROM User u WHERE u.password = :encryPsw and u.username =:userNm");
-            query.setParameter("encryPsw", cryptString(user.getPassword()));
+            query.setParameter("encryPsw", AuthHelper.cryptString(user.getPassword()));
             query.setParameter("userNm", user.getUsername());
             if (query.getResultList().size() > 0) {
                 return Response.ok(query.getResultList()).build();

@@ -35,6 +35,12 @@
             <version>42.0.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>sharycar</groupId>
+            <artifactId>authentication-bussines-logic</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
 
         <dependency>
             <groupId>com.kumuluz.ee</groupId>
