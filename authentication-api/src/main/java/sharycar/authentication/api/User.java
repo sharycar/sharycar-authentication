@@ -1,6 +1,8 @@
 package sharycar.authentication.api;
 
 import javax.persistence.*;
+import java.util.Date;
+
 // sd testss s
 @Entity
 @Table(name = "users")
@@ -18,8 +20,18 @@ public class User {
     @Column(unique=true)
     private String username;
 
-
     private String password;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date registration_date; // Time of transaction - when
+
+    public Date getRegistration_date() {
+        return registration_date;
+    }
+
+    public void setRegistration_date(Date registration_date) {
+        this.registration_date = registration_date;
+    }
 
     public Integer getId() {
         return id;

@@ -1,4 +1,4 @@
-package sharycar.authentication.api;
+package sharycar.authentication.bussineslogic;
 
 public class ProjectInfoClass {
     public String[] clani;

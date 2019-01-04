@@ -27,4 +27,12 @@ public class AuthHelper {
 
     }
 
+    /**
+     *  This does not provide any security, used just for demo.
+     * @return
+     */
+    public static String getSalt() {
+        return "zDcO7TXvpJt70XKwLkgUPgx5vY7I9t7z2ajh8LWK";
+    }
+
 }

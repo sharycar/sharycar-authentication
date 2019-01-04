@@ -1,8 +1,16 @@
+/**
+ *  Authentication API
+ *
+ *  This is API is used just for demo purpose and does not provide security.
+ *  @TODO: Use cryptographic libraries for implementing secure logging and accessing resources
+ *
+ */
+
 package sharycar.authentication.api;
 
-import sharycar.authentication.api.User;
+import jdk.nashorn.internal.runtime.JSONFunctions;
 import sharycar.authentication.bussineslogic.AuthHelper;
-import java.security.MessageDigest;
+import sharycar.authentication.bussineslogic.ProjectInfoClass;
 
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
@@ -12,6 +20,7 @@ import javax.persistence.TypedQuery;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 import java.util.List;
 //import com.auth0.jwt.algorithms.Algorithm;
 //import com.auth0.jwt.JWT;
@@ -47,7 +56,7 @@ public class AuthenticationResource {
      * @return
      */
     @GET
-        @Path("/{id}")
+    @Path("/{id}")
     public Response getUser(@PathParam("id") Integer id) {
 
             User u = em.find(User.class, id);
@@ -60,6 +69,7 @@ public class AuthenticationResource {
     @POST
     public Response registerUser(User user) {
         user.setId(null);
+        user.setRegistration_date(new Date());
         if (user.getUsername() == null || user.getUsername().isEmpty()
                 || user.getEmail() == null || user.getEmail().isEmpty()
         || user.getPassword() == null || user.getPassword().isEmpty()) {
@@ -102,11 +112,12 @@ public class AuthenticationResource {
             query.setParameter("encryPsw", AuthHelper.cryptString(user.getPassword()));
             query.setParameter("userNm", user.getUsername());
             if (query.getResultList().size() > 0) {
-                return Response.ok(query.getResultList()).build();
+                User u = (User) query.getResultList().get(0);
+                String userToken = AuthHelper.cryptString(u.getPassword()+AuthHelper.getSalt());
+                return Response.ok(JSONFunctions.quote(userToken)).build();
             } else {
                 return Response.status(Response.Status.UNAUTHORIZED).build();
             }
-
 
         } catch (Exception e) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
@@ -115,9 +126,10 @@ public class AuthenticationResource {
 
     }
 
-
     /**
-     *  Proof of concept - @by Jaka
+     * Exposed project information
+     *
+     * @return
      */
     @GET
     @Path("/info")
@@ -125,29 +137,6 @@ public class AuthenticationResource {
         ProjectInfoClass pic = new ProjectInfoClass();
         return Response.ok(pic).build();
     }
-//    /**
-//     *  Proof of concept - @by Jaka
-//     */
-//    @GET
-//    @Path("/{id}")
-//    public Response getUserJWT(@PathParam("id") Integer id) {
-//
-//        // TODO Check password
-//        User u = em.find(User.class, id);
-//
-//        String token;
-//        try {
-//            Algorithm algorithm = Algorithm.HMAC256("replaceWithSomeSecret");
-//            token = JWT.create()
-//                    .withIssuer("auth0")
-//                    .sign(algorithm);
-//        } catch (JWTCreationException exception){
-//            //Invalid Signing configuration / Couldn't convert Claims.
-//            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-//        }
-//
-//        return Response.ok(token).build();
-//    }
 
 
 }
