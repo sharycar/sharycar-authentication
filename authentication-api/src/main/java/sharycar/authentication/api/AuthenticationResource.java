@@ -8,6 +8,7 @@
 
 package sharycar.authentication.api;
 
+import com.kumuluz.ee.logs.cdi.Log;
 import jdk.nashorn.internal.runtime.JSONFunctions;
 import sharycar.authentication.bussineslogic.AuthHelper;
 import sharycar.authentication.bussineslogic.ProjectInfoClass;
@@ -30,6 +31,7 @@ import java.util.List;
 @RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Log
 public class AuthenticationResource {
 
     @PersistenceContext
